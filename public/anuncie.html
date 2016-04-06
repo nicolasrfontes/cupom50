@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-br" ng-app="cupom50">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+
+    <title>Anuncie | Cupom50</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <link href="css/navbar-static-top.css" rel="stylesheet">
+    <script src="js/ie8-responsive-file-warning.js"></script>
+    <script src="js/ie-emulation-modes-warning.js"></script>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="js/angular.min.js"></script>
+    <script src="assets/js/mainCore.js"></script>
+    <script src="assets/js/mainController.js"></script>
+    <script src="assets/js/mainService.js"></script>
+</head>
+
+<body style="background-color: #18bc9c; font-family: Candara" ng-controller="anuncieController">
+
+<!-- Static navbar -->
+<nav class="navbar navbar-default navbar-static-top" style="background-color: white">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html"><img src="img/logo_cupom50.png" style="width:50%px;height:50px"></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right" >
+                <br/>
+                <li class="submenu"><a href="comofunciona.html" style="color: #18bc9c; font-size: large" ><b>Como Funciona</b></a></li>
+                <li class="submenu"><a href="anuncie.html" style="color: #18bc9c;font-size: large"><b>Anuncie</b></a></li>
+                <li class="submenubotao"><a href="entrar.html" style="border: solid 2px;color: #18bc9c;font-size: large" class="btn" ><b class="submenubotao">Entrar / Cadastre-se</b></a></li>
+            </ul>
+            <br/>
+        </div>
+        <br/>
+    </div>
+</nav>
+
+
+<div class="container">
+    <div class="jumbotron" style="background-color: white">
+        <h1 style="color: #18bc9c" align="center">Anuncie</h1>
+        <hr/>
+        <h3 align="center">Que bom saber que você nos escolheu para divulgar. Com certeza foi uma ótima escolha!</h3>
+        <h4 align="center">Agora queremos saber mais de você e do seu negócio. Preencha o formulário abaixo e, em breve, entraremos em contato.</h4>
+        <form>
+            <div class="col-md-4">
+                <h4>Nome*: <input class="form-control" placeholder="Seu nome.." ng-model="objetoAnuncie.nome"></h4>
+            </div>
+            <div class="col-md-4">
+                <h4>E-mail*: <input class="form-control" placeholder="Seu e-mail.." ng-model="objetoAnuncie.email"></h4>
+            </div>
+            <div class="col-md-4">
+                <h4>Telefone*: <input class="form-control" placeholder="(xx)xxxxx-xxxx" ng-model="objetoAnuncie.telefone"></h4>
+            </div>
+            <div class="col-md-4">
+                <h4>Empresa*: <input class="form-control" placeholder="Nome da empresa.." ng-model="objetoAnuncie.empresa"></h4>
+            </div>
+            <div class="col-md-4">
+                <h4>Segmento*: <input class="form-control" placeholder="Segmento da empresa.." ng-model="objetoAnuncie.segmento"></h4>
+            </div>
+            <div class="col-md-4">
+                <h4>Site: <input class="form-control" placeholder="Site da empresa.." ng-model="objetoAnuncie.site"></h4>
+            </div>
+            <div class="col-md-4">
+                <h4>Endereço Completo*: <input class="form-control" placeholder="Rua - Número - Bairro - CEP" ng-model="objetoAnuncie.endereco"></h4>
+            </div>
+            <div class="col-md-4">
+                <h4>Cidade*: <input class="form-control" placeholder="Cidade.." ng-model="objetoAnuncie.cidade"></h4>
+            </div>
+            <div class="col-md-4">
+                <h4>Estado*: <input class="form-control" placeholder="Estado.." ng-model="objetoAnuncie.estado"></h4>
+            </div>
+            <div class="col-md-12">
+                <h4>Apresente qual a oferta que você deseja*: <textarea class="form-control" rows="4" ng-model="objetoAnuncie.oferta" placeholder="Nos conte, detalhadamente, qual a oferta de produto/serviço que deseja anunciar"></textarea></h4>
+            </div>
+            <div class="col-md-1" id="enviar">
+                <button class="btn" style="background-color: #18bc9c; color: #ffffff" ng-click="anunciar()">ENVIAR</button>
+            </div>
+            <div class="col-md-1" id="enviando" style="display: none">
+                <button class="btn" style="background-color: #18bc9c; color: #ffffff" disabled>ENVIANDO..</button>
+            </div>
+            <div class="col-md-6" id="respostaErro" style="display: none">
+                <p style="color: red"><b>{{respostaAnuncie}}</b></p>
+            </div>
+            <div class="col-md-6" id="respostaSucesso" style="display: none">
+                <p style="color: #18bc9c"><b>{{respostaAnuncie}}</b></p>
+            </div>
+        </form>
+        <div class="clearfix"></div>
+        <hr/>
+        <h3>- Veja como funciona para quem anuncia conosco</h3>
+        <div class="col-md-4" style="height: 200px">
+            <div class="col-md-10" style="background-color: #ffffff; border: solid 2px #18bc9c;height: 160px" >
+                <h3 align="center">1.) A empresa anuncia em nosso site um cupom de 50% sobre algum produto/serviço. </h3>
+            </div>
+            <div class="col-md-2" align="center"><br/><h1><i class="glyphicon glyphicon-arrow-right"></i></h1></div>
+        </div>
+        <div class="col-md-4" style="height: 200px">
+            <div class="col-md-10" style="background-color: #ffffff; border: solid 2px #18bc9c;height: 160px" >
+                <h3 align="center">2.) Nós divulgamos no site, na rede social e e-mails durante o prazo estipulado.</h3>
+            </div>
+            <div class="col-md-2" align="center"><br/><h1><i class="glyphicon glyphicon-arrow-right"></i></h1></div>
+        </div>
+        <div class="col-md-4" style="height: 200px">
+            <div class="col-md-10" style="background-color: #ffffff; border: solid 2px #18bc9c;height: 160px" >
+                <h3 align="center">3.) A plataforma cobra 50% do valor do cupom a cada venda realizada. </h3>
+            </div>
+            <div class="col-md-2" align="center"><br/><h1><i class="glyphicon glyphicon-arrow-right"></i></h1></div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="col-md-4" style="height: 200px">
+            <div class="col-md-10" style="background-color: #ffffff; border: solid 2px #18bc9c;height: 160px" >
+                <h3 align="center">4.) A cada venda realizada, enviamos um e-mail informando o código cupom comprado. </h3>
+            </div>
+            <div class="col-md-2" align="center"><br/><h1><i class="glyphicon glyphicon-arrow-right"></i></h1></div>
+        </div>
+        <div class="col-md-4" style="height: 200px">
+            <div class="col-md-10" style="background-color: #ffffff; border: solid 2px #18bc9c;height: 160px" >
+                <h3 align="center">5.) Efetuamos o pagamento para o anunciante 15 dias após o término da divulgação.</h3>
+            </div>
+            <div class="col-md-2" align="center"><br/><h1><i class="glyphicon glyphicon-arrow-right"></i></h1></div>
+        </div>
+        <div class="col-md-4" style="height: 200px">
+            <div class="col-md-10" style="background-color: #ffffff; border: solid 2px #18bc9c;height: 160px" >
+                <h3 align="center">6.) Anunciante amplia suas vendas e conquista mais clientes para outras futuras vendas. </h3>
+            </div>
+            <div class="col-md-2" align="center"><br/><h1><i class="glyphicon glyphicon-ok"></i></h1></div>
+        </div>
+        <div class="clearfix"></div>
+
+    </div>
+</div>
+<footer class="modal-footer">
+    <p style="color: white" align="center">2016 | Todos Direitos Reservados</p>
+</footer>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')</script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/ie10-viewport-bug-workaround.js"></script>
+</body>
+</html>

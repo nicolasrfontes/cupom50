@@ -1,0 +1,10 @@
+.navbar-static-top {
+  margin-bottom: 19px;
+}
+.submenu:hover{
+    text-decoration: underline;
+}
+.submenubotao:hover{
+    background-color: #18bc9c;
+    color: white;
+}

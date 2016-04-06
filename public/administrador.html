@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-br" ng-app="admcupom50">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+
+    <title>Cadastrar Oferta | Cupom50</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <link href="css/navbar-static-top.css" rel="stylesheet">
+    <script src="js/ie8-responsive-file-warning.js"></script>
+    <script src="js/ie-emulation-modes-warning.js"></script>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="js/angular.min.js"></script>
+    <script src="assets/js/admCore.js"></script>
+    <script src="assets/js/admController.js"></script>
+    <script src="assets/js/admService.js"></script>
+</head>
+
+<body style="background-color: #18bc9c; font-family: Candara" ng-controller="aController">
+
+<!-- Static navbar -->
+<nav class="navbar navbar-default navbar-static-top" style="background-color: white">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html"><img src="img/logo_cupom50.png" style="width:50%px;height:50px"></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right" >
+                <br/>
+                <li class="submenu"><a href="comofunciona.html" style="color: #18bc9c; font-size: large" ><b>Como Funciona</b></a></li>
+                <li class="submenu"><a href="anuncie.html" style="color: #18bc9c;font-size: large"><b>Anuncie</b></a></li>
+                <li class="submenubotao"><a href="entrar.html" style="border: solid 2px;color: #18bc9c;font-size: large" class="btn" ><b class="submenubotao">Entrar / Cadastre-se</b></a></li>
+            </ul>
+            <br/>
+        </div>
+        <br/>
+    </div>
+</nav>
+
+
+<div class="container">
+    <div class="jumbotron" style="background-color: white">
+        <h1 style="color: #18bc9c" align="center">Cadastrar Oferta</h1>
+        <hr/>
+        <form>
+            <div class="col-md-4">
+                <h4>Titulo: <input class="form-control" placeholder="Titulo.." ng-model="objetoOferta.titulo"></h4>
+            </div>
+            <div class="col-md-4">
+                <h4>Imagem: <input class="form-control" placeholder="nome.formato" ng-model="objetoOferta.imagem"></h4>
+            </div>
+            <div class="col-md-4">
+                <h4>ValorCupom*: <input class="form-control" placeholder="0,00" ng-model="objetoOferta.valorcupom"></h4>
+            </div>
+            <div class="col-md-4">
+                <h4>Data Final*: <input class="form-control" placeholder="00/00/0000" ng-model="objetoOferta.datafinal"></h4>
+            </div>
+            <div class="col-md-4">
+                <h4>Descrição: <input class="form-control" placeholder="Descrição.." ng-model="objetoOferta.descricao"></h4>
+            </div>
+            <div class="col-md-4">
+                <h4>Informações Local*: <input class="form-control" placeholder="Informações" ng-model="objetoOferta.infoLocal"></h4>
+            </div>
+            <div class="col-md-4">
+                <h4>Imagem1*: <input class="form-control" placeholder="nome.formato" ng-model="objetoOferta.img1"></h4>
+            </div>
+            <div class="col-md-4">
+                <h4>Imagem2*: <input class="form-control" placeholder="nome.formato" ng-model="objetoOferta.img2"></h4>
+            </div>
+            <div class="col-md-4">
+                <h4>Imagem3*: <input class="form-control" placeholder="nome.formato" ng-model="objetoOferta.img3"></h4>
+            </div>
+
+            <div class="col-md-1" id="enviar">
+                <button class="btn" style="background-color: #18bc9c; color: #ffffff" ng-click="salvarOferta()">SALVAR</button>
+            </div>
+            <div class="col-md-1" id="enviando" style="display: none">
+                <button class="btn" style="background-color: #18bc9c; color: #ffffff" disabled>ENVIANDO..</button>
+            </div>
+            <div class="col-md-6" id="respostaErro" style="display: none">
+                <p style="color: red"><b>{{respostaAnuncie}}</b></p>
+            </div>
+            <div class="col-md-6" id="respostaSucesso" style="display: none">
+                <p style="color: #18bc9c"><b>{{respostaAnuncie}}</b></p>
+            </div>
+        </form>
+        <div class="clearfix"></div>
+
+    </div>
+</div>
+<footer class="modal-footer">
+    <p style="color: white" align="center">2016 | Todos Direitos Reservados</p>
+</footer>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')</script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/ie10-viewport-bug-workaround.js"></script>
+</body>
+</html>
