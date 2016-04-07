@@ -179,7 +179,7 @@ angular.module('mainController', [])
         }
         $scope.deslogarUsuario = function(){
             localStorage.removeItem('usuario');
-            location.href = 'entrar.html';
+            location.reload();
         }
         $scope.logarUsuario = function(){
             document.getElementById('enviarLogin').style.display = 'none';
