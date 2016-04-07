@@ -39,12 +39,20 @@
             </button>
             <a class="navbar-brand" href="index.html"><img src="img/logo_cupom50.png" style="width:50%px;height:50px"></a>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right" >
+        <div id="navbar" class="navbar-collapse collapse" ng-controller="usuarioController"
+             ng-init="verificarUsuarioLogado()">
+            <ul class="nav navbar-nav navbar-right">
                 <br/>
-                <li class="submenu"><a href="comofunciona.html" style="color: #18bc9c; font-size: large" ><b>Como Funciona</b></a></li>
-                <li class="submenu"><a href="anuncie.html" style="color: #18bc9c;font-size: large"><b>Anuncie</b></a></li>
-                <li class="submenubotao"><a href="entrar.html" style="border: solid 2px;color: #18bc9c;font-size: large" class="btn" ><b class="submenubotao">Entrar / Cadastre-se</b></a></li>
+                <li class="submenu"><a href="comofunciona.html" style="color: #18bc9c; font-size: large"><b>Como
+                    Funciona</b></a></li>
+                <li class="submenu"><a href="anuncie.html" style="color: #18bc9c;font-size: large"><b>Anuncie</b></a>
+                </li>
+                <li id="nomeUsuario"><a href="painel.html"><b>{{nomeUsuario}}</b></a></li>
+                <li id="linkSair" class="submenu"><a href="" ng-click="deslogarUsuario()">Sair</a></li>
+                <li id="botaoEntrar" class="submenubotao"><a href="entrar.html"
+                                                             style="border: solid 2px;color: #18bc9c;font-size: large"
+                                                             class="btn"><b class="submenubotao">Entrar /
+                    Cadastre-se</b></a></li>
             </ul>
             <br/>
         </div>

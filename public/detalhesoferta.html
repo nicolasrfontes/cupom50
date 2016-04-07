@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br" ng-app="cupom50">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,9 +16,13 @@
     <script src="js/ie-emulation-modes-warning.js"></script>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <script src="js/angular.min.js"></script>
+    <script src="assets/js/mainController.js"></script>
+    <script src="assets/js/mainService.js"></script>
+    <script src="assets/js/mainCore.js"></script>
 </head>
 
-<body style="background-color: #18bc9c; font-family: Candara">
+<body style="background-color: #18bc9c; font-family: Candara" ng-controller="ofertaController">
 
 <!-- Static navbar -->
 <nav class="navbar navbar-default navbar-static-top" style="background-color: white">
@@ -34,15 +38,20 @@
             <a class="navbar-brand" href="index.html"><img src="img/logo_cupom50.png"
                                                            style="width:50%px;height:50px"></a>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
+        <div id="navbar" class="navbar-collapse collapse" ng-controller="usuarioController"
+             ng-init="verificarUsuarioLogado()">
             <ul class="nav navbar-nav navbar-right">
                 <br/>
                 <li class="submenu"><a href="comofunciona.html" style="color: #18bc9c; font-size: large"><b>Como
                     Funciona</b></a></li>
                 <li class="submenu"><a href="anuncie.html" style="color: #18bc9c;font-size: large"><b>Anuncie</b></a>
                 </li>
-                <li class="submenubotao"><a href="entrar.html" style="border: solid 2px;color: #18bc9c;font-size: large"
-                                            class="btn"><b class="submenubotao">Entrar / Cadastre-se</b></a></li>
+                <li id="nomeUsuario"><a href="painel.html"><b>{{nomeUsuario}}</b></a></li>
+                <li id="linkSair" class="submenu"><a href="" ng-click="deslogarUsuario()">Sair</a></li>
+                <li id="botaoEntrar" class="submenubotao"><a href="entrar.html"
+                                                             style="border: solid 2px;color: #18bc9c;font-size: large"
+                                                             class="btn"><b class="submenubotao">Entrar /
+                    Cadastre-se</b></a></li>
             </ul>
             <br/>
         </div>
@@ -51,64 +60,41 @@
 </nav>
 
 
-<div class="container">
+<div class="container" ng-init="buscarOferta()">
     <div class="jumbotron" style="background-color: white">
         <h1 style="color: #18bc9c" align="center">Detalhes da Oferta</h1>
         <hr/>
         <div class="col-md-6">
-            <img src="img/anuncios/sobrancelha.png" style="width: 100%">
+            <img src="img/anuncios/{{oferta.imagem}}" style="width: 100%">
         </div>
         <div class="col-md-6">
-            <h2>50% de desconto no Design de Sobrancelhas com aplicação de Henna! Studio D com Karen Alvarenga</h2>
+            <h2>{{oferta.titulo}}</h2>
 
-            <h1>R$ 3,00</h1>
+            <h1>R$ {{oferta.valorcupom}}</h1>
 
             <h3>
-                <button class="btn btn-lg" style="background-color: #18bc9c; color: white">COMPRAR</button>
+                <button class="btn btn-lg" ng-click="botaoComprar()" style="background-color: #18bc9c; color: white">COMPRAR</button>
             </h3>
-            <div class="col-md-6" align="center"><h4>Compras Efetuadas: 15</h4></div>
-            <div class="col-md-6" align="center"><h4>Encerramento: 18/04/2016</h4></div>
+            <div class="col-md-6" align="center"><h4>Compras Efetuadas: {{oferta.comprasEfetuadas}}</h4></div>
+            <div class="col-md-6" align="center"><h4>Encerramento: {{oferta.datafinal}}</h4></div>
         </div>
         <div class="clearfix"></div>
         <hr/>
         <h3 align="center" style="color: #18bc9c">REGRAS DA PROMOÇÃO</h3>
         <p align="center"><b>FAVOR LER ATENTAMENTE ODAS REGRAS ANTES DE EFETUAR A COMPRA</b></p><br/>
-        <p>
-            1.) Cada cupom vale 50% de desconto no Design de Sobrancelha com Aplicação de Henna.<br/>
-            2.) Você comprando o cupom por R$3,00 você paga apenas 50% do valor do Design de Sobrancelha com Aplicação
-            de Henna.
-            Ex: Se você não tiver o cupom, você paga o valor de R$ 45,00. Comprando e levando o cupom até o local, você
-            paga apenas R$ 22,50.<br/>
-            3.) O cupom não pode ser trocado por outro serviço ou produto no estabelecimento.<br/>
-            4.) O cupom não pode ser trocado ou cancelado depois de ter feito o pagamento aqui no Cupom50.<br/>
-            5.) Seu cupom estará disponivel em sua conta aqui no Cupom50 assim que o pagamento for aprovado.<br/>
-            6.) O cupom tem prazo de validade de 15 dias após o término da promoção (03/05/2016)<br/>
-            7.) Sem limites de cupom por pessoa. Compre quantos quiser.<br/>
-            8.) Válido para todos os dias de funcionamento do salão. <br/>
-            9.) Cupom não acumulativo com outras promoções <br/>
-            10.) OBRIGATÓRIO apresentação do Cupom IMPRESSO para receber o desconto. <br/>
-            11.) Imagem meramente ilustrativa.
-        </p>
+        <p ng-bind-html-unsafe="oferta.descricao"></p>
         <hr/>
         <h3 align="center" style="color: #18bc9c">INFORMAÇÕES DO LOCAL</h3>
-        <p>
-            Karen Alvarenga oferece seus serviços de Design de Sobrancelhas, Aplicação de Henna e Micropigmentação no Studio D Cabeleleiros<br/>
-            O Studio D Cabeleleiros fica localizado no centro de Pindamonhangaba.<br/>
-            O estabelecimento fornece serviços de corte de cabelo masculino e feminino, manicure e pedicure além de design de sobrancelha.<br/>
-            Atendimento com profissionais da área. Para facilitar o atendimento é recomendado que seja feito um agendamento de horário com antecedência.<br/><br/>
-            <b>
-                Karen Alvarenga<br/>
-                (12) 98111-2916<br/>
-            </b>
-        </p>
+        <p ng-bind-html-unsafe="oferta.infoLocal"></p>
+        <br/>
         <div class="col-md-4">
-            <img src="img/anuncios/ka01.jpg" style="width: 100%; height: 200px;">
+            <img src="img/anuncios/{{oferta.img1}}" style="width: 100%; height: 200px;">
         </div>
         <div class="col-md-4">
-            <img src="img/anuncios/ka02.jpg" style="width: 100%; height: 200px;">
+            <img src="img/anuncios/{{oferta.img2}}" style="width: 100%; height: 200px;">
         </div>
         <div class="col-md-4">
-            <img src="img/anuncios/ka03.jpg" style="width: 100%; height: 200px;">
+            <img src="img/anuncios/{{oferta.img3}}" style="width: 100%; height: 200px;">
         </div>
         <div class="clearfix"></div>
     </div>

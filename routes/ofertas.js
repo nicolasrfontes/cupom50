@@ -24,6 +24,6 @@ exports.retornarCidades = function(req,res){
 
 exports.retornarOfertas = function(req,res){
     db.collection('oferta').find().toArray(function(err,ofertas){
-        res.send(ofertas);
+        res.send(ofertas.sort());
     })
 }

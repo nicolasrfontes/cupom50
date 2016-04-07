@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br" ng-app="cupom50">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,6 +19,10 @@
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="js/angular.min.js"></script>
+    <script src="assets/js/mainController.js"></script>
+    <script src="assets/js/mainService.js"></script>
+    <script src="assets/js/mainCore.js"></script>
 </head>
 
 <body style="background-color: #18bc9c; font-family: Candara">
@@ -27,24 +31,36 @@
 <nav class="navbar navbar-default navbar-static-top" style="background-color: white">
     <div class="container">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.html"><img src="img/logo_cupom50.png" style="width:50%px;height:50px"></a>
+            <a class="navbar-brand" href="index.html"><img src="img/logo_cupom50.png"
+                                                           style="width:50%px;height:50px"></a>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right" >
+        <div id="navbar" class="navbar-collapse collapse" ng-controller="usuarioController"
+             ng-init="verificarUsuarioLogado()">
+            <ul class="nav navbar-nav navbar-right">
                 <br/>
-                <li class="submenu"><a href="comofunciona.html" style="color: #18bc9c; font-size: large" ><b>Como Funciona</b></a></li>
-                <li class="submenu"><a href="anuncie.html" style="color: #18bc9c;font-size: large"><b>Anuncie</b></a></li>
-                <li class="submenubotao"><a href="entrar.html" style="border: solid 2px;color: #18bc9c;font-size: large" class="btn" ><b class="submenubotao">Entrar / Cadastre-se</b></a></li>
+                <li class="submenu"><a href="comofunciona.html" style="color: #18bc9c; font-size: large"><b>Como
+                    Funciona</b></a></li>
+                <li class="submenu"><a href="anuncie.html" style="color: #18bc9c;font-size: large"><b>Anuncie</b></a>
+                </li>
+                <li id="nomeUsuario"><a href="painel.html"><b>{{nomeUsuario}}</b></a></li>
+                <li id="linkSair" class="submenu"><a href="" ng-click="deslogarUsuario()">Sair</a></li>
+                <li id="botaoEntrar" class="submenubotao"><a href="entrar.html"
+                                                             style="border: solid 2px;color: #18bc9c;font-size: large"
+                                                             class="btn"><b class="submenubotao">Entrar /
+                    Cadastre-se</b></a></li>
             </ul>
             <br/>
         </div>
         <br/>
+    </div>
+    <br/>
     </div>
 </nav>
 
@@ -54,81 +70,114 @@
         <h1 style="color: #18bc9c" align="center">Como Funciona</h1>
         <hr/>
         <h3>- Para o cliente comprar</h3>
+
         <div class="col-md-4" style="height: 200px">
-            <div class="col-md-10" style="background-color: #ffffff; border: solid 2px #18bc9c;height: 160px" >
+            <div class="col-md-10" style="background-color: #ffffff; border: solid 2px #18bc9c;height: 160px">
                 <h3 align="center">1.) Nós negociamos os melhores descontos com os estabelecimentos </h3>
             </div>
-            <div class="col-md-2" align="center"><br/><h1><i class="glyphicon glyphicon-arrow-right"></i></h1></div>
+            <div class="col-md-2" align="center"><br/>
+
+                <h1><i class="glyphicon glyphicon-arrow-right"></i></h1></div>
         </div>
         <div class="col-md-4" style="height: 200px">
-            <div class="col-md-10" style="background-color: #ffffff; border: solid 2px #18bc9c;height: 160px" >
-                <h3 align="center">2.) Anunciamos as promoções no site, em nossa rede social e por e-mail aos cadastrados.  </h3>
+            <div class="col-md-10" style="background-color: #ffffff; border: solid 2px #18bc9c;height: 160px">
+                <h3 align="center">2.) Anunciamos as promoções no site, em nossa rede social e por e-mail aos
+                    cadastrados. </h3>
             </div>
-            <div class="col-md-2" align="center"><br/><h1><i class="glyphicon glyphicon-arrow-right"></i></h1></div>
+            <div class="col-md-2" align="center"><br/>
+
+                <h1><i class="glyphicon glyphicon-arrow-right"></i></h1></div>
         </div>
         <div class="col-md-4" style="height: 200px">
-            <div class="col-md-10" style="background-color: #ffffff; border: solid 2px #18bc9c;height: 160px" >
-                <h3 align="center">3.) Você escolhe as melhores ofertas e faz a compra do cupom de desconto.  </h3>
+            <div class="col-md-10" style="background-color: #ffffff; border: solid 2px #18bc9c;height: 160px">
+                <h3 align="center">3.) Você escolhe as melhores ofertas e faz a compra do cupom de desconto. </h3>
             </div>
-            <div class="col-md-2" align="center"><br/><h1><i class="glyphicon glyphicon-arrow-right"></i></h1></div>
+            <div class="col-md-2" align="center"><br/>
+
+                <h1><i class="glyphicon glyphicon-arrow-right"></i></h1></div>
         </div>
         <div class="clearfix"></div>
         <div class="col-md-4" style="height: 200px">
-            <div class="col-md-10" style="background-color: #ffffff; border: solid 2px #18bc9c;height: 160px" >
-                <h3 align="center">4.) Após confirmar o pagamento, você recebe o cupom diretamente na sua conta.  </h3>
+            <div class="col-md-10" style="background-color: #ffffff; border: solid 2px #18bc9c;height: 160px">
+                <h3 align="center">4.) Após confirmar o pagamento, você recebe o cupom diretamente na sua conta. </h3>
             </div>
-            <div class="col-md-2" align="center"><br/><h1><i class="glyphicon glyphicon-arrow-right"></i></h1></div>
+            <div class="col-md-2" align="center"><br/>
+
+                <h1><i class="glyphicon glyphicon-arrow-right"></i></h1></div>
         </div>
         <div class="col-md-4" style="height: 200px">
-            <div class="col-md-10" style="background-color: #ffffff; border: solid 2px #18bc9c;height: 160px" >
-                <h3 align="center">5.) Você imprime o cupom de desconto e vai até o estabelecimento na data que desejar.  </h3>
+            <div class="col-md-10" style="background-color: #ffffff; border: solid 2px #18bc9c;height: 160px">
+                <h3 align="center">5.) Você imprime o cupom de desconto e vai até o estabelecimento na data que
+                    desejar. </h3>
             </div>
-            <div class="col-md-2" align="center"><br/><h1><i class="glyphicon glyphicon-arrow-right"></i></h1></div>
+            <div class="col-md-2" align="center"><br/>
+
+                <h1><i class="glyphicon glyphicon-arrow-right"></i></h1></div>
         </div>
         <div class="col-md-4" style="height: 200px">
-            <div class="col-md-10" style="background-color: #ffffff; border: solid 2px #18bc9c;height: 160px" >
-                <h3 align="center">6.) Você entrega o cupom de desconto e adquire o produto que tanto deseja por 50% de desconto </h3>
+            <div class="col-md-10" style="background-color: #ffffff; border: solid 2px #18bc9c;height: 160px">
+                <h3 align="center">6.) Você entrega o cupom de desconto e adquire o produto que tanto deseja por 50% de
+                    desconto </h3>
             </div>
-            <div class="col-md-2" align="center"><br/><h1><i class="glyphicon glyphicon-ok"></i></h1></div>
+            <div class="col-md-2" align="center"><br/>
+
+                <h1><i class="glyphicon glyphicon-ok"></i></h1></div>
         </div>
         <div class="clearfix"></div>
         <h3>- Para a empresa anunciar</h3>
+
         <div class="col-md-4" style="height: 200px">
-            <div class="col-md-10" style="background-color: #ffffff; border: solid 2px #18bc9c;height: 160px" >
-                <h3 align="center">1.) A empresa anuncia em nosso site um cupom de 50% sobre algum produto/serviço. </h3>
+            <div class="col-md-10" style="background-color: #ffffff; border: solid 2px #18bc9c;height: 160px">
+                <h3 align="center">1.) A empresa anuncia em nosso site um cupom de 50% sobre algum
+                    produto/serviço. </h3>
             </div>
-            <div class="col-md-2" align="center"><br/><h1><i class="glyphicon glyphicon-arrow-right"></i></h1></div>
+            <div class="col-md-2" align="center"><br/>
+
+                <h1><i class="glyphicon glyphicon-arrow-right"></i></h1></div>
         </div>
         <div class="col-md-4" style="height: 200px">
-            <div class="col-md-10" style="background-color: #ffffff; border: solid 2px #18bc9c;height: 160px" >
+            <div class="col-md-10" style="background-color: #ffffff; border: solid 2px #18bc9c;height: 160px">
                 <h3 align="center">2.) Nós divulgamos no site, na rede social e e-mails durante o prazo estipulado.</h3>
             </div>
-            <div class="col-md-2" align="center"><br/><h1><i class="glyphicon glyphicon-arrow-right"></i></h1></div>
+            <div class="col-md-2" align="center"><br/>
+
+                <h1><i class="glyphicon glyphicon-arrow-right"></i></h1></div>
         </div>
         <div class="col-md-4" style="height: 200px">
-            <div class="col-md-10" style="background-color: #ffffff; border: solid 2px #18bc9c;height: 160px" >
+            <div class="col-md-10" style="background-color: #ffffff; border: solid 2px #18bc9c;height: 160px">
                 <h3 align="center">3.) A plataforma cobra 50% do valor do cupom a cada venda realizada. </h3>
             </div>
-            <div class="col-md-2" align="center"><br/><h1><i class="glyphicon glyphicon-arrow-right"></i></h1></div>
+            <div class="col-md-2" align="center"><br/>
+
+                <h1><i class="glyphicon glyphicon-arrow-right"></i></h1></div>
         </div>
         <div class="clearfix"></div>
         <div class="col-md-4" style="height: 200px">
-            <div class="col-md-10" style="background-color: #ffffff; border: solid 2px #18bc9c;height: 160px" >
-                <h3 align="center">4.) A cada venda realizada, enviamos um e-mail informando o código cupom comprado. </h3>
+            <div class="col-md-10" style="background-color: #ffffff; border: solid 2px #18bc9c;height: 160px">
+                <h3 align="center">4.) A cada venda realizada, enviamos um e-mail informando o código cupom
+                    comprado. </h3>
             </div>
-            <div class="col-md-2" align="center"><br/><h1><i class="glyphicon glyphicon-arrow-right"></i></h1></div>
+            <div class="col-md-2" align="center"><br/>
+
+                <h1><i class="glyphicon glyphicon-arrow-right"></i></h1></div>
         </div>
         <div class="col-md-4" style="height: 200px">
-            <div class="col-md-10" style="background-color: #ffffff; border: solid 2px #18bc9c;height: 160px" >
-                <h3 align="center">5.) Efetuamos o pagamento para o anunciante 15 dias após o término da divulgação.</h3>
+            <div class="col-md-10" style="background-color: #ffffff; border: solid 2px #18bc9c;height: 160px">
+                <h3 align="center">5.) Efetuamos o pagamento para o anunciante 15 dias após o término da
+                    divulgação.</h3>
             </div>
-            <div class="col-md-2" align="center"><br/><h1><i class="glyphicon glyphicon-arrow-right"></i></h1></div>
+            <div class="col-md-2" align="center"><br/>
+
+                <h1><i class="glyphicon glyphicon-arrow-right"></i></h1></div>
         </div>
         <div class="col-md-4" style="height: 200px">
-            <div class="col-md-10" style="background-color: #ffffff; border: solid 2px #18bc9c;height: 160px" >
-                <h3 align="center">6.) Anunciante amplia suas vendas e conquista mais clientes para outras futuras vendas. </h3>
+            <div class="col-md-10" style="background-color: #ffffff; border: solid 2px #18bc9c;height: 160px">
+                <h3 align="center">6.) Anunciante amplia suas vendas e conquista mais clientes para outras futuras
+                    vendas. </h3>
             </div>
-            <div class="col-md-2" align="center"><br/><h1><i class="glyphicon glyphicon-ok"></i></h1></div>
+            <div class="col-md-2" align="center"><br/>
+
+                <h1><i class="glyphicon glyphicon-ok"></i></h1></div>
         </div>
         <div class="clearfix"></div>
     </div>

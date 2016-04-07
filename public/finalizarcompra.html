@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-br" ng-app="cupom50">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+
+    <title>Finalizar Compra | Cupom50</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <link href="css/navbar-static-top.css" rel="stylesheet">
+    <script src="js/ie8-responsive-file-warning.js"></script>
+    <script src="js/ie-emulation-modes-warning.js"></script>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="js/angular.min.js"></script>
+    <script src="assets/js/mainController.js"></script>
+    <script src="assets/js/mainService.js"></script>
+    <script src="assets/js/mainCore.js"></script>
+</head>
+
+<body style="background-color: #18bc9c; font-family: Candara" ng-controller="usuarioController">
+
+<!-- Static navbar -->
+<nav class="navbar navbar-default navbar-static-top" style="background-color: white" ng-init="validarUsuario()">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html"><img src="img/logo_cupom50.png"
+                                                           style="width:50%px;height:50px"></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse" ng-init="verificarUsuarioLogado()">
+            <ul class="nav navbar-nav navbar-right">
+                <br/>
+                <li class="submenu"><a href="comofunciona.html" style="color: #18bc9c; font-size: large"><b>Como
+                    Funciona</b></a></li>
+                <li class="submenu"><a href="anuncie.html" style="color: #18bc9c;font-size: large"><b>Anuncie</b></a>
+                </li>
+                <li id="nomeUsuario"><a href="painel.html"><b>{{nomeUsuario}}</b></a></li>
+                <li id="linkSair" class="submenu"><a href="" ng-click="deslogarUsuario()">Sair</a></li>
+                <li id="botaoEntrar" class="submenubotao"><a href="entrar.html"
+                                                             style="border: solid 2px;color: #18bc9c;font-size: large"
+                                                             class="btn"><b class="submenubotao">Entrar /
+                    Cadastre-se</b></a></li>
+            </ul>
+            <br/>
+        </div>
+        <br/>
+    </div>
+</nav>
+
+
+<div class="container" ng-controller="ofertaController" ng-init="buscarOferta() ">
+    <div class="jumbotron" style="background-color: white">
+        <h1 style="color: #18bc9c" align="center">Finalizar Compra</h1>
+        <hr/>
+        <h4 align="center">Finalize sua compra aqui selecionando quantos cupons deseja</h4>
+        <div class="clearfix"></div>
+        <div>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Imagem</th>
+                        <th>Oferta</th>
+                        <th>Quantidade</th>
+                        <th>Valor Total</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><img src="img/anuncios/{{oferta.imagem}}" style="width: 200px; height: 150px"></td>
+                        <td><br/><h3>{{oferta.titulo}}</h3></td>
+                        <td><br/><h3><button class="btn" ng-click="mudarQuantidade('menos')"><i class="glyphicon glyphicon-minus"></i></button> {{quantidade}} <button class="btn" ng-click="mudarQuantidade('mais')"><i class="glyphicon glyphicon-plus"></i></button></h3></td>
+                        <td><br/><h3>{{valorTotal}}</h3></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="clearfix"></div>
+            <div id="erro" align="center" style="display: none"><p style="color: red">{{resposta}}</p></div>
+            <div id="sucesso" align="center" style="display: none"><p style="color: #18bc9c">{{resposta}}</p></div>
+            <p align="center" id="enviar"><button class="btn alert" style="background-color: #18bc9c; color: white" ng-click="finalizarCompra()">FINALIZAR COMPRA</button></p>
+            <p align="center" id="enviando" style="display: none"><button class="btn alert" style="background-color: #18bc9c; color: white" disabled>FINALIZANDO...</button></p>
+            <article align="center"><small align="center"><b>AO CLICAR NO BOTÃO ACIMA VOCÊ SERÁ REDIRECIONADO AO SITE DO PAGSEGURO PARA FAZER O PAGAMENTO</b></small></article>
+            <article align="center"><small align="center"><b>O PAGAMENTO É FEITO POR CARTÃO DE CRÉDITO, BOLETO OU DEPÓSITO ONLINE. TOTALMENTE SEGURO!</b></small></article>
+            <article align="center"><small align="center"><b>PARA PAGAMENTO EM BOLETO É ACRESCIDO O VALOR DE R$ 1,00 - TAXA DE RISCO DO PAGSEGURO</b></small></article>
+            <article align="center"><small align="center"><b>PARA ESCLARECIMENTO DE DÚVIDAS, ENTRE EM CONTATO CONOSCO <a href="contato.html">CLICANDO AQUI</a></b></small></article>
+
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+<footer class="modal-footer">
+    <p style="color: white" align="center">2016 | Todos Direitos Reservados</p>
+</footer>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')</script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/ie10-viewport-bug-workaround.js"></script>
+</body>
+</html>

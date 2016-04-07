@@ -9,6 +9,7 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var anuncie = require('./routes/anuncie');
 var ofertas = require('./routes/ofertas');
+var usuario = require('./routes/usuario');
 
 var app = express();
 
@@ -30,7 +31,11 @@ app.post('/salvarAnuncio',anuncie.anunciarOferta);
 app.post('/salvarOferta',anuncie.salvarOferta);
 app.get('/retornarCidades',ofertas.retornarCidades);
 app.get('/retornarOfertas',ofertas.retornarOfertas);
-
+app.post('/cadastrarUsuario',usuario.cadastrarUsuario);
+app.post('/editarUsuario',usuario.editarUsuario);
+app.post('/logarUsuario',usuario.logarUsuario);
+app.post('/finalizarCompra',usuario.finalizarCompra);
+app.get('/notificacao',usuario.notificacao);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

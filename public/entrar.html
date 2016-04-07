@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br" ng-app="cupom50">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,9 +19,13 @@
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="js/angular.min.js"></script>
+    <script src="assets/js/mainController.js"></script>
+    <script src="assets/js/mainService.js"></script>
+    <script src="assets/js/mainCore.js"></script>
 </head>
 
-<body style="background-color: #18bc9c; font-family: Candara">
+<body style="background-color: #18bc9c; font-family: Candara" ng-controller="usuarioController">
 
 <!-- Static navbar -->
 <nav class="navbar navbar-default navbar-static-top" style="background-color: white">
@@ -62,28 +66,28 @@
         <div class="col-md-5">
             <h3 style="color: #18bc9c" align="center">Fazer Cadastro</h3>
             <form>
-                <h4>Nome: <input class="form-control" placeholder="Seu nome.."></h4>
-                <h4>E-mail: <input class="form-control" placeholder="Seu e-mail.."></h4>
-                <h4>Sexo: <select class="form-control">
+                <h4>Nome: <input class="form-control" placeholder="Seu nome.." ng-model="usuario.nome"></h4>
+                <h4>E-mail: <input class="form-control" placeholder="Seu e-mail.." ng-model="usuario.email"></h4>
+                <h4>Sexo: <select class="form-control" ng-model="usuario.sexo">
                     <option>Selecione</option>
                     <option>Feminino</option>
                     <option>Masculino</option>
                 </select></h4>
-                <h4>Cidade: <input class="form-control" placeholder="Sua cidade.."></h4>
-                <h4>Estado: <input class="form-control" placeholder="Seu estado.."></h4>
-                <h4>Senha: <input type="password" class="form-control" placeholder="Sua senha.."></h4>
-                <h4>Confirmar Senha: <input type="password" class="form-control" placeholder="Confirme a senha.."></h4>
-                <div class="col-md-1" id="enviar">
-                    <button class="btn" style="background-color: #18bc9c; color: #ffffff">ENVIAR</button>
+                <h4>Cidade: <input class="form-control" placeholder="Sua cidade.." ng-model="usuario.cidade"></h4>
+                <h4>Estado: <input class="form-control" placeholder="Seu estado.." ng-model="usuario.estado"></h4>
+                <h4>Senha: <input type="password" class="form-control" placeholder="Sua senha.." ng-model="usuario.senha"></h4>
+                <h4>Confirmar Senha: <input type="password" class="form-control" placeholder="Confirme a senha.." ng-model="usuario.confirma"></h4>
+                <div class="col-md-3" id="enviar">
+                    <button class="btn" style="background-color: #18bc9c; color: #ffffff" ng-click="cadastrarUsuario()">ENVIAR</button>
                 </div>
-                <div class="col-md-1" id="enviando" style="display: none">
+                <div class="col-md-3" id="enviando" style="display: none">
                     <button class="btn" style="background-color: #18bc9c; color: #ffffff" disabled>ENVIANDO..</button>
                 </div>
-                <div class="col-md-4" id="respostaErro" style="display: none">
-                    <p style="color: red"><b>Mensagem de erro</b></p>
+                <div class="col-md-12" id="respostaErro" style="display: none">
+                    <p style="color: red"><b>{{respostaCadastro}}</b></p>
                 </div>
-                <div class="col-md-4" id="respostaSucesso" style="display: none">
-                    <p style="color: #18bc9c"><b>Mensagem de sucesso</b></p>
+                <div class="col-md-12" id="respostaSucesso" style="display: none">
+                    <p style="color: #18bc9c"><b>{{respostaCadastro}}</b></p>
                 </div>
             </form>
         </div>
@@ -91,11 +95,11 @@
         <div class="col-md-5">
             <h3 style="color: #18bc9c" align="center">Fazer Login</h3>
             <form>
-                <h4>E-mail: <input class="form-control" placeholder="Seu e-mail.."></h4>
-                <h4>Senha: <input type="password" class="form-control" placeholder="Sua senha.."></h4>
+                <h4>E-mail: <input class="form-control" placeholder="Seu e-mail.." ng-model="email"></h4>
+                <h4>Senha: <input type="password" class="form-control" placeholder="Sua senha.." ng-model="senha"></h4>
 
                 <div class="col-md-1" id="enviarLogin">
-                    <button class="btn" style="background-color: #18bc9c; color: #ffffff">ENTRAR</button>
+                    <button class="btn" style="background-color: #18bc9c; color: #ffffff" ng-click="logarUsuario()">ENTRAR</button>
                 </div>
                 <div class="col-md-4 navbar-right">
                     <a >Esqueci a senha..</a>
@@ -103,11 +107,8 @@
                 <div class="col-md-1" id="enviandoLogin" style="display: none">
                     <button class="btn" style="background-color: #18bc9c; color: #ffffff" disabled>ENVIANDO..</button>
                 </div>
-                <div class="col-md-4" id="respostaErroLogin" style="display: none">
-                    <p style="color: red"><b>Mensagem de erro</b></p>
-                </div>
-                <div class="col-md-4" id="respostaSucessoLogin" style="display: none">
-                    <p style="color: #18bc9c"><b>Mensagem de sucesso</b></p>
+                <div class="col-md-12" id="respostaErroLogin" style="display: none">
+                    <p style="color: red"><b>{{respostaLogin}}</b></p>
                 </div>
             </form>
         </div>
