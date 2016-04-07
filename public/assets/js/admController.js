@@ -9,7 +9,9 @@ angular.module('admController', [])
             infoLocal:'',
             img1:'',
             img2:'',
-            img3:''
+            img3:'',
+            cidade:'',
+            estado:''
         }
         $scope.salvarOferta = function(){
             document.getElementById('enviar').style.display = 'none';

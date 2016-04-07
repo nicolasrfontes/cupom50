@@ -42,6 +42,7 @@ exports.anunciarOferta = function(req,res){
 };
 
 exports.salvarOferta = function(req,res){
+    req.body['comprasEfetuadas'] = 0;
     db.collection('oferta').insert(req.body, function(err,objeto){
         res.send({status:2,resposta:'Oferta anunciada com sucesso!'});
     })

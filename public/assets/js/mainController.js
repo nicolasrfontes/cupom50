@@ -28,3 +28,42 @@ angular.module('mainController', [])
                 })
         }
     }])
+    .controller('indexController',['$scope','$http','indexService',function($scope,$http,indexService){
+        var cidade = localStorage.getItem('cidade');
+        if ((cidade!=null)&&(cidade!=undefined)){
+            $scope.cidadeAtual = 'Cidade: '+cidade;
+        }
+        $scope.buscarCidades = function(){
+            indexService.retornarCidades()
+                .success(function(retorno){
+                    console.log(retorno);
+                    $scope.listaCidades = retorno;
+                    $scope.listaCidades.push('Ver Todas');
+                })
+        }
+        $scope.buscarOfertas = function(){
+            indexService.retornarOfertas()
+                .success(function(retorno){
+                    var cidade = localStorage.getItem('cidade');
+                    if ((cidade==null)||(cidade==undefined)){
+                        $scope.listaOfertas = retorno;
+                    }else{
+                        var listaOfertas = [];
+                        retorno.forEach(function(item){
+                            if (cidade==item.cidade){
+                                listaOfertas.push(item);
+                            }
+                        })
+                        $scope.listaOfertas = listaOfertas;
+                    }
+                })
+        }
+        $scope.cidadeFiltro = function(cidade){
+            if (cidade=='Ver Todas'){
+                localStorage.removeItem('cidade');
+            }else{
+                localStorage.setItem('cidade',cidade);
+            }
+            location.reload();
+        }
+    }]);

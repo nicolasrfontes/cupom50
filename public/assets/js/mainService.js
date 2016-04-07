@@ -6,3 +6,13 @@ angular.module('mainService', [])
             }
         }
     }])
+    .factory('indexService',['$http',function($http){
+        return {
+            retornarCidades: function(){
+                return $http.get('/retornarCidades');
+            },
+            retornarOfertas: function(){
+                return $http.get('/retornarOfertas');
+            }
+        }
+    }])
