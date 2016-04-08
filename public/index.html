@@ -17,9 +17,9 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <script src="js/angular.min.js"></script>
-    <script src="assets/js/mainController.js"></script>
-    <script src="assets/js/mainService.js"></script>
-    <script src="assets/js/mainCore.js"></script>
+    <script src="js/mainController.js"></script>
+    <script src="js/mainService.js"></script>
+    <script src="js/mainCore.js"></script>
 </head>
 
 <body style="background-color: #18bc9c; font-family: Candara" ng-controller="ofertaController">
@@ -53,7 +53,7 @@
                 <li class="submenu"><a href="anuncie.html" style="color: #18bc9c;font-size: large"><b>Anuncie</b></a></li>
                 <li id="nomeUsuario"><a href="painel.html"><b>{{nomeUsuario}}</b></a></li>
                 <li id="linkSair" class="submenu"><a href="" ng-click="deslogarUsuario()">Sair</a></li>
-                <li id="botaoEntrar" class="submenubotao"><a href="entrar.html" style="border: solid 2px;color: #18bc9c;font-size: large"
+                <li id="botaoEntrar" class="submenubotao"><a ng-click="retirarOferta()" href="entrar.html" style="border: solid 2px;color: #18bc9c;font-size: large"
                                                              class="btn"><b class="submenubotao">Entrar / Cadastre-se</b></a></li>
             </ul>
             <br/>
@@ -122,7 +122,7 @@
     <div class="clearfix"></div>
 </div>
 <footer class="modal-footer">
-    <p style="color: white" align="center">2016 | Todos Direitos Reservados</p>
+    <p style="color: white" align="center">2016 | Todos Direitos Reservados | Cupom50 - Tudo por 50% de desconto</p>
 </footer>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')</script>

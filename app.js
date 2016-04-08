@@ -36,6 +36,8 @@ app.post('/editarUsuario',usuario.editarUsuario);
 app.post('/logarUsuario',usuario.logarUsuario);
 app.post('/finalizarCompra',usuario.finalizarCompra);
 app.get('/notificacao',usuario.notificacao);
+app.get('/todosUsuarios',usuario.todosUsuarios);
+app.post('/editarCompraUsuario', usuario.editarCompraUsuario);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

@@ -20,9 +20,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="js/angular.min.js"></script>
-    <script src="assets/js/mainCore.js"></script>
-    <script src="assets/js/mainController.js"></script>
-    <script src="assets/js/mainService.js"></script>
+    <script src="js/mainCore.js"></script>
+    <script src="js/mainController.js"></script>
+    <script src="js/mainService.js"></script>
 </head>
 
 <body style="background-color: #18bc9c; font-family: Candara" ng-controller="anuncieController">
@@ -49,7 +49,7 @@
                 </li>
                 <li id="nomeUsuario"><a href="painel.html"><b>{{nomeUsuario}}</b></a></li>
                 <li id="linkSair" class="submenu"><a href="" ng-click="deslogarUsuario()">Sair</a></li>
-                <li id="botaoEntrar" class="submenubotao"><a href="entrar.html"
+                <li id="botaoEntrar" class="submenubotao"><a ng-click="retirarOferta()" href="entrar.html"
                                                              style="border: solid 2px;color: #18bc9c;font-size: large"
                                                              class="btn"><b class="submenubotao">Entrar /
                     Cadastre-se</b></a></li>
@@ -64,6 +64,7 @@
 <div class="container">
     <div class="jumbotron" style="background-color: white">
         <h1 style="color: #18bc9c" align="center">Anuncie</h1>
+        <h4 align="center">Se quiser, solicite nosso Midia Kit pelo e-mail: <b>cupom50@gmail.com</b></h4>
         <hr/>
         <h3 align="center">Que bom saber que você nos escolheu para divulgar. Com certeza foi uma ótima escolha!</h3>
         <h4 align="center">Agora queremos saber mais de você e do seu negócio. Preencha o formulário abaixo e, em breve, entraremos em contato.</h4>
@@ -156,7 +157,7 @@
     </div>
 </div>
 <footer class="modal-footer">
-    <p style="color: white" align="center">2016 | Todos Direitos Reservados</p>
+    <p style="color: white" align="center">2016 | Todos Direitos Reservados | Cupom50 - Tudo por 50% de desconto</p>
 </footer>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')</script>

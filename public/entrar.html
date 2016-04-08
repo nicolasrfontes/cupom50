@@ -20,9 +20,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="js/angular.min.js"></script>
-    <script src="assets/js/mainController.js"></script>
-    <script src="assets/js/mainService.js"></script>
-    <script src="assets/js/mainCore.js"></script>
+    <script src="js/mainController.js"></script>
+    <script src="js/mainService.js"></script>
+    <script src="js/mainCore.js"></script>
 </head>
 
 <body style="background-color: #18bc9c; font-family: Candara" ng-controller="usuarioController">
@@ -48,7 +48,7 @@
                     Funciona</b></a></li>
                 <li class="submenu"><a href="anuncie.html" style="color: #18bc9c;font-size: large"><b>Anuncie</b></a>
                 </li>
-                <li class="submenubotao"><a href="entrar.html" style="border: solid 2px;color: #18bc9c;font-size: large"
+                <li class="submenubotao"><a ng-click="retirarOferta()" href="entrar.html" style="border: solid 2px;color: #18bc9c;font-size: large"
                                             class="btn"><b class="submenubotao">Entrar / Cadastre-se</b></a></li>
             </ul>
             <br/>
@@ -62,6 +62,7 @@
     <div class="jumbotron" style="background-color: white">
         <h1 style="color: #18bc9c" align="center">Entre Já!</h1>
         <h4 align="center">Faça seu cadastro agora mesmo!! Se já for cadastrado, faça seu login ao lado.</h4>
+        <h4 align="center" style="color: red"><b>CADASTRO DE CLIENTES NÃO ESTÁ LIBERADO! FASE ATUAL: ADQUIRIR PROMOÇÕES DE ESTABELECIMENTOS</b></h4>
         <hr/>
         <div class="col-md-5">
             <h3 style="color: #18bc9c" align="center">Fazer Cadastro</h3>
@@ -78,7 +79,8 @@
                 <h4>Senha: <input type="password" class="form-control" placeholder="Sua senha.." ng-model="usuario.senha"></h4>
                 <h4>Confirmar Senha: <input type="password" class="form-control" placeholder="Confirme a senha.." ng-model="usuario.confirma"></h4>
                 <div class="col-md-3" id="enviar">
-                    <button class="btn" style="background-color: #18bc9c; color: #ffffff" ng-click="cadastrarUsuario()">ENVIAR</button>
+                    <!--<button class="btn" style="background-color: #18bc9c; color: #ffffff" ng-click="cadastrarUsuario()">ENVIAR</button>-->
+                    <button class="btn" style="background-color: #18bc9c; color: #ffffff" disabled>NÃO LIBERADO</button>
                 </div>
                 <div class="col-md-3" id="enviando" style="display: none">
                     <button class="btn" style="background-color: #18bc9c; color: #ffffff" disabled>ENVIANDO..</button>
@@ -99,7 +101,8 @@
                 <h4>Senha: <input type="password" class="form-control" placeholder="Sua senha.." ng-model="senha"></h4>
 
                 <div class="col-md-1" id="enviarLogin">
-                    <button class="btn" style="background-color: #18bc9c; color: #ffffff" ng-click="logarUsuario()">ENTRAR</button>
+                    <!--<button class="btn" style="background-color: #18bc9c; color: #ffffff" ng-click="logarUsuario()">ENTRAR</button>-->
+                    <button class="btn" style="background-color: #18bc9c; color: #ffffff" disabled>NÃO LIBERADO</button>
                 </div>
                 <div class="col-md-4 navbar-right">
                     <a >Esqueci a senha..</a>
@@ -116,7 +119,7 @@
     </div>
 </div>
 <footer class="modal-footer">
-    <p style="color: white" align="center">2016 | Todos Direitos Reservados</p>
+    <p style="color: white" align="center">2016 | Todos Direitos Reservados | Cupom50 - Tudo por 50% de desconto</p>
 </footer>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')</script>

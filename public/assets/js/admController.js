@@ -27,5 +27,41 @@ angular.module('admController', [])
                         document.getElementById('respostaSucesso').style.display = 'block';
                     }
                 })
+        };
+        $scope.buscarTodosUsuarios = function(){
+            aService.buscarTodosUsuarios()
+                .success(function(retorno){
+                    $scope.usuarios = retorno;
+                })
+        }
+        $scope.verComprasUsuario = function(usuario){
+            localStorage.setItem('admUsuario',JSON.stringify(usuario));
+            $scope.compras = usuario.compras;
+        }
+        $scope.editarCompra = function(compra){
+            if (($scope.cupom!='')&&($scope.cupom!=undefined)) {
+                compra.cupom = $scope.cupom;
+            }
+            if (($scope.status!='')&&($scope.status!=undefined)) {
+                compra.status = $scope.status;
+            }
+            if (($scope.codigocompra!='')&($scope.codigocompra!=undefined)){
+                compra.codigoCompra = $scope.codigocompra;
+            }
+            var usuario = JSON.parse(localStorage.getItem('admUsuario'));
+            for(var i=0;i<usuario.compras.length;i++){
+                if ((usuario.compras[i].idOferta==compra.idOferta)&&(usuario.compras[i].dataCompra==compra.dataCompra)&&(usuario.compras[i].valor==compra.valor)){
+                    delete compra.$$hashKey;
+                    usuario.compras[i] = compra;
+                }
+            }
+            aService.editarCompra(usuario)
+                .success(function(retorno){
+                    if (retorno.status==1){
+                        $scope.resposta = retorno.resposta;
+                    }else{
+                        location.reload();
+                    }
+                })
         }
     }])

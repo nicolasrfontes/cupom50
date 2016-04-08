@@ -130,72 +130,84 @@ exports.editarUsuario = function (req, res) {
 };
 
 exports.finalizarCompra = function (req, res) {
-    var pagseguro = require('pagseguro');
-    var pag = new pagseguro({
-        email: 'nicolas.rfontes@gmail.com',
-        token: '594E47A96886469AB5452A7DD3695452',
-        mode: 'sandbox'
-    });
+    db.collection('usuario').findOne({'email':req.body.emailComprador}, function(err,usuario){
+        if ((usuario==null)||(usuario==undefined)){
+            res.send({status:1,resposta: 'Usuário não está logado!'});
+        }else{
+            var compra = {
+                idOferta: req.body.idOferta,
+                oferta: req.body.oferta,
+                status: req.body.status,
+                dataCompra: req.body.dataCompra,
+                quantidade: req.body.quantidade,
+                valor: req.body.valor,
+                codigoCompra:'',
+                cupom:''
+            }
+            usuario.compras.push(compra);
+            db.collection('usuario').update({'email':usuario.email},{$set:{'compras':usuario.compras}}, function(err,compraFeita){
+                var pagseguro = require('pagseguro');
+                var pag = new pagseguro({
+                    email: 'nicolas.rfontes@gmail.com',
+                    token: '594E47A96886469AB5452A7DD3695452',
+                    mode: 'sandbox'//////////////tirar sandbox daqui
+                });
 
-    pag.currency('BRL');
-    pag.reference('12345');
-    var valorFinal = req.body.valor.replace(',','.');
-    var valorUnitario = parseFloat(valorFinal/req.body.quantidade).toFixed(2);
-    pag.addItem({
-        id: 1,
-        description: req.body.oferta,
-        amount: valorUnitario,
-        quantity: req.body.quantidade
-    });
+                pag.currency('BRL');
+                pag.reference('12345');
+                var valorFinal = req.body.valor.replace(',','.');
+                var valorUnitario = parseFloat(valorFinal/req.body.quantidade).toFixed(2);
+                pag.addItem({
+                    id: 1,
+                    description: req.body.oferta,
+                    amount: valorUnitario,
+                    quantity: req.body.quantidade
+                });
 
-    pag.buyer({
-        name: 'José Comprador',
-        email: 'c92147920332117434725@sandbox.pagseguro.com.br',
-        phoneAreaCode: '51',
-        phoneNumber: '12345678'
-    });
+                pag.buyer({
+                    name: usuario.nome,
+                    email: usuario.email
+                });
 
-    pag.setRedirectURL("http://localhost:3000/compraconcluida.html");////////////////URL de retorno para o usuário
-    pag.setNotificationURL("http://localhost:3000/notificacao");
+                pag.setRedirectURL("http://localhost:3000/compraconcluida.html");////////////////URL de retorno para o usuário
+                pag.setNotificationURL("http://localhost:3000/notificacao");//////////URL de notificacao para mudança de pagamento
 
-    pag.send(function(err, resposta) {
-        if (err) {
-            console.log(err);
+                pag.send(function(err, resposta) {
+                    if (err) {
+                        console.log(err);
+                    }
+                    var parseString = require('xml2js').parseString;
+                    console.log(resposta);
+                    var xml = resposta;
+                    parseString(xml, function (err, result) {
+                        console.log(result);
+                        var codigo = result.checkout.code[0];
+                        console.log(codigo);
+                        res.send({status:2,codigo:codigo});
+
+                    });
+                });
+            })
         }
-        var parseString = require('xml2js').parseString;
-        console.log(resposta);
-        var xml = resposta;
-        parseString(xml, function (err, result) {
-            console.log(result);
-            var codigo = result.checkout.code[0];
-            console.log(codigo);
-            res.send({status:2,codigo:codigo});
-
-        });
-    });
-
-    /*db.collection('usuario').findOne({'email':req.body.emailComprador}, function(err,usuario){
-     if ((usuario==null)||(usuario==undefined)){
-     res.send({status:1,resposta: 'Usuário não está logado!'});
-     }else{
-     var compra = {
-     idOferta: req.body.idOferta,
-     oferta: req.body.oferta,
-     status: req.body.status,
-     dataCompra: req.body.dataCompra,
-     quantidade: req.body.quantidade,
-     valor: req.body.valor
-     }
-     usuario.compras.push(compra);
-     db.collection('usuario').update({'email':usuario.email},{$set:{'compras':usuario.compras}}, function(err,compraFeita){
-     res.send({status:2,resposta: 'Compra efetuada com sucesso'});
-     })
-     }
-     })*/
+    })
 };
 
 exports.notificacao = function(req,res){
-    console.log(req);
-    console.log(res);
-    res.redirect('http://localhost:3000/index.html');
-}
+    console.log('--Veio uma notificação de pagamento--');
+};
+
+exports.todosUsuarios = function(req,res){
+    db.collection('usuario').find().toArray(function(err,usuarios){
+        res.send(usuarios);
+    })
+};
+
+exports.editarCompraUsuario = function(req,res){
+    db.collection('usuario').update({'email':req.body.email},{$set:{'compras':req.body.compras}},function(err,comprasEditadas){
+        if (err){
+            res.send({status:1,resposta: 'Erro no servidor: '+err});
+        }else{
+            res.send({status:2,resposta: 'Edição Efetuada com Sucesso!'});
+        }
+    })
+};

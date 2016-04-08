@@ -188,6 +188,9 @@ angular.module('mainController', [])
             localStorage.removeItem('usuario');
             location.reload();
         }
+        $scope.retirarOferta = function(){
+            localStorage.removeItem('oferta');
+        }
         $scope.logarUsuario = function(){
             document.getElementById('enviarLogin').style.display = 'none';
             document.getElementById('enviandoLogin').style.display = 'block';

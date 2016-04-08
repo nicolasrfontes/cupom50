@@ -20,9 +20,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="js/angular.min.js"></script>
-    <script src="assets/js/mainController.js"></script>
-    <script src="assets/js/mainService.js"></script>
-    <script src="assets/js/mainCore.js"></script>
+    <script src="js/mainController.js"></script>
+    <script src="js/mainService.js"></script>
+    <script src="js/mainCore.js"></script>
 </head>
 
 <body style="background-color: #18bc9c; font-family: Candara" ng-controller="usuarioController">
@@ -50,7 +50,7 @@
                 </li>
                 <li id="nomeUsuario"><a href="painel.html"><b>{{nomeUsuario}}</b></a></li>
                 <li id="linkSair" class="submenu"><a href="" ng-click="deslogarUsuario()">Sair</a></li>
-                <li id="botaoEntrar" class="submenubotao"><a href="entrar.html"
+                <li id="botaoEntrar" class="submenubotao"><a ng-click="retirarOferta()" href="entrar.html"
                                                              style="border: solid 2px;color: #18bc9c;font-size: large"
                                                              class="btn"><b class="submenubotao">Entrar /
                     Cadastre-se</b></a></li>
@@ -81,7 +81,7 @@
         </div>
         <div class="clearfix"></div>
         <div id="minhascompras">
-            <h3 align="center">Compras Realizadas</h3>
+            <h3 align="center">Compras Realizadas - {{usuario.compras.length}}</h3>
             <div class="table-responsive">
                 <table class="table">
                     <thead>
@@ -89,17 +89,20 @@
                         <th>Titulo</th>
                         <th>Status</th>
                         <th>Data da Compra</th>
-                        <th>Data de Validade</th>
                         <th>Cupom</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>titulo agora</td>
-                        <td>Pagamento Pendente</td>
-                        <td>07/04/2016</td>
-                        <td>30/05/2016</td>
-                        <td><a>Imprimir Cupom</a></td>
+                    <tr ng-repeat="c in usuario.compras">
+                        <td>{{c.oferta}}</td>
+                        <td>{{c.status}}</td>
+                        <td>{{c.dataCompra}}</td>
+                        <td><a onclick="avisoImprimir()">Imprimir Cupom</a></td>
+                        <script>
+                            function avisoImprimir(){
+                                alert('Funcionalidade ainda não disponível');
+                            }
+                        </script>
                     </tr>
                     </tbody>
                 </table>
@@ -156,7 +159,7 @@
     </div>
 </div>
 <footer class="modal-footer">
-    <p style="color: white" align="center">2016 | Todos Direitos Reservados</p>
+    <p style="color: white" align="center">2016 | Todos Direitos Reservados | Cupom50 - Tudo por 50% de desconto</p>
 </footer>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')</script>

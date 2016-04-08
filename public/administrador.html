@@ -106,11 +106,70 @@
             </div>
         </form>
         <div class="clearfix"></div>
-
+        <br/>
+        <div style="background-color: #18bc9c; height: 5px"></div>
+        <div ng-controller="aController" ng-init="buscarTodosUsuarios()">
+            <h1 style="color: #18bc9c" align="center">Compras de Clientes</h1>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Usuario</th>
+                        <th>E-mail</th>
+                        <th>Cidade</th>
+                        <th>Compras</th>
+                        <th>Ver Compras</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="usuario in usuarios">
+                        <td>{{usuario.nome}}</td>
+                        <td>{{usuario.email}}</td>
+                        <td>{{usuario.cidade}}</td>
+                        <td>{{usuario.compras.length}}</td>
+                        <td><a ng-click="verComprasUsuario(usuario)">Ver Compras</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <hr/>
+            <h3>Compras</h3>
+            <div class="col-md-4">Código Compra: <input ng-model="codigocompra"></div>
+            <div class="col-md-4">Cupom: <input ng-model="cupom"></div>
+            <div class="col-md-4">Status Pagamento: <input ng-model="status"></div>
+            <div class="clearfix"></div>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Oferta</th>
+                        <th>Status</th>
+                        <th>Data Compra</th>
+                        <th>Valor</th>
+                        <th>Código Compra</th>
+                        <th>Cupom</th>
+                        <th>Editar</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="c in compras">
+                        <td>{{c.oferta}}</td>
+                        <td>{{c.status}}</td>
+                        <td>{{c.dataCompra}}</td>
+                        <td>{{c.valor}}</td>
+                        <td>{{c.codigoCompra}}</td>
+                        <td>{{c.cupom}}</td>
+                        <td><a ng-click="editarCompra(c)">Editar</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div style="background-color: #18bc9c; height: 5px"></div>
     </div>
 </div>
 <footer class="modal-footer">
-    <p style="color: white" align="center">2016 | Todos Direitos Reservados</p>
+    <p style="color: white" align="center">2016 | Todos Direitos Reservados | Cupom50 - Tudo por 50% de desconto</p>
 </footer>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')</script>
