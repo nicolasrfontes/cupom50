@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="icon" href="favicon.ico">
 
-    <title>Finalizar Compra | Cupom50</title>
+    <title>Compra Concluída | Cupom50</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
     <link href="css/navbar-static-top.css" rel="stylesheet">
@@ -23,6 +23,11 @@
     <script src="assets/js/mainController.js"></script>
     <script src="assets/js/mainService.js"></script>
     <script src="assets/js/mainCore.js"></script>
+    <script>
+        var url = document.URL;
+        url = url.replace('http://localhost:3000/compraconcluida.html?id=','');
+        console.log(url);
+    </script>
 </head>
 
 <body style="background-color: #18bc9c; font-family: Candara" ng-controller="usuarioController">

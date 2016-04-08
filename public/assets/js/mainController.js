@@ -116,18 +116,20 @@ angular.module('mainController', [])
                 dataCompra: data,
                 quantidade: $scope.quantidade,
                 valor: $scope.valorTotal,
-                emailComprador: $scope.usuario.email
+                emailComprador: $scope.usuario.email,
+                codigoCompra:'',
+                cupom:''
             }
             ofertaService.finalizarCompra(compra)
                 .success(function(retorno){
-                    document.getElementById('enviar').style.display = 'block';
-                    document.getElementById('enviando').style.display = 'none';
                     $scope.resposta = retorno.resposta;
                     if (retorno.status==1){
                         document.getElementById('erro').style.display = 'block';
                     }else{
                         location.href = 'https://sandbox.pagseguro.uol.com.br/v2/checkout/payment.html?code='+retorno.codigo;
                     }
+                    document.getElementById('enviar').style.display = 'block';
+                    document.getElementById('enviando').style.display = 'none';
                 })
         }
     }])
@@ -152,8 +154,13 @@ angular.module('mainController', [])
                     if (retorno.status==1){
                         document.getElementById('respostaErro').style.display = 'block';
                     }else{
-                        localStorage.setItem('usuario',JSON.stringify(retorno.objeto));
-                        location.href = 'painel.html';
+                        localStorage.setItem('usuario', JSON.stringify(retorno.objeto));
+                        var oferta = JSON.parse(localStorage.getItem('oferta'));
+                        if ((oferta==null)||(oferta==undefined)){
+                            location.href = 'painel.html';
+                        }else{
+                            location.href = 'finalizarcompra.html';
+                        }
                     }
                 })
         }
@@ -199,7 +206,6 @@ angular.module('mainController', [])
                         localStorage.setItem('usuario', JSON.stringify(retorno.objeto));
                         var oferta = JSON.parse(localStorage.getItem('oferta'));
                         if ((oferta==null)||(oferta==undefined)){
-
                             location.href = 'painel.html';
                         }else{
                             location.href = 'finalizarcompra.html';
